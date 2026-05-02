@@ -1,6 +1,10 @@
 import type { JSONArray, JSONObject, JSONValue, SchemaPath } from '../types/schema';
 
-export function updateNestedValue(root: JSONValue, path: SchemaPath, nextValue: JSONValue): JSONValue {
+export function updateNestedValue(
+  root: JSONValue,
+  path: SchemaPath,
+  nextValue: JSONValue,
+): JSONValue {
   if (path.length === 0) {
     return nextValue;
   }

@@ -15,9 +15,10 @@ export function generateTypeScript(schema: SchemaNode, rootName = 'Root'): strin
     return declarations.map((declaration) => declaration.body).join('\n\n');
   }
 
-  return [`type ${safeRootName} = ${rootType};`, ...declarations.map((declaration) => declaration.body)].join(
-    '\n\n',
-  );
+  return [
+    `type ${safeRootName} = ${rootType};`,
+    ...declarations.map((declaration) => declaration.body),
+  ].join('\n\n');
 }
 
 function renderType(
@@ -41,7 +42,11 @@ function renderType(
       }
 
       const itemName =
-        schema.item.kind === 'object' ? singularizeTypeName(suggestedName) : `${suggestedName}Item`;
+        schema.item.kind === 'object'
+          ? schema.path.length === 0
+            ? singularizeTypeName(suggestedName)
+            : suggestedName
+          : `${suggestedName}Item`;
       const itemType = renderType(schema.item, itemName, declarations, emitted);
 
       return itemType.includes(' | ') ? `(${itemType})[]` : `${itemType}[]`;
@@ -84,9 +89,11 @@ function emitInterface(
 
   declarations.push({
     name,
-    body: [`interface ${name} {`, ...(fields.length > 0 ? fields : ['  [key: string]: never;']), '}'].join(
-      '\n',
-    ),
+    body: [
+      `interface ${name} {`,
+      ...(fields.length > 0 ? fields : ['  [key: string]: never;']),
+      '}',
+    ].join('\n'),
   });
 }
 

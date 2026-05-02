@@ -195,7 +195,9 @@ function renderObjectField(schema: SchemaNode, label: string, path: CodePath): s
   }
 
   const fields = Object.entries(schema.fields)
-    .map(([key, fieldSchema]) => renderField(fieldSchema, humanizeKey(key), [...path, literalPathSegment(key)]))
+    .map(([key, fieldSchema]) =>
+      renderField(fieldSchema, humanizeKey(key), [...path, literalPathSegment(key)]),
+    )
     .join('\n\n');
 
   return `<fieldset className="space-y-3 rounded-md border border-slate-200 p-4">

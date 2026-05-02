@@ -22,10 +22,16 @@ export function CodeBlock({ code, label, copyLabel }: CodeBlockProps) {
         <h2 className="text-sm font-semibold text-slate-900">{label}</h2>
         <button
           type="button"
-          onClick={handleCopy}
+          onClick={() => {
+            void handleCopy();
+          }}
           className="inline-flex items-center gap-2 rounded-md border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 shadow-sm transition hover:border-teal-300 hover:text-teal-700"
         >
-          {copied ? <Check className="h-4 w-4" aria-hidden="true" /> : <Copy className="h-4 w-4" aria-hidden="true" />}
+          {copied ? (
+            <Check className="h-4 w-4" aria-hidden="true" />
+          ) : (
+            <Copy className="h-4 w-4" aria-hidden="true" />
+          )}
           {copied ? 'Copied' : copyLabel}
         </button>
       </div>

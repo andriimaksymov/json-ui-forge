@@ -10,14 +10,7 @@ export type JSONArray = JSONValue[];
 
 export type SchemaPath = Array<string | number>;
 
-export type SchemaKind =
-  | 'string'
-  | 'number'
-  | 'boolean'
-  | 'null'
-  | 'array'
-  | 'object'
-  | 'mixed';
+export type SchemaKind = 'string' | 'number' | 'boolean' | 'null' | 'array' | 'object' | 'mixed';
 
 interface BaseSchemaNode {
   kind: SchemaKind;

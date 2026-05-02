@@ -31,12 +31,22 @@ export function JsonEditor({
             <FileJson className="h-5 w-5 text-teal-600" aria-hidden="true" />
             <h2 className="text-base font-semibold text-slate-950">JSON input</h2>
           </div>
-          <p className="mt-1 text-sm text-slate-500">Paste or edit JSON. Previews update automatically.</p>
+          <p className="mt-1 text-sm text-slate-500">
+            Paste or edit JSON. Previews update automatically.
+          </p>
         </div>
         <div className="flex flex-wrap gap-2">
-          <EditorButton icon={<Wand2 className="h-4 w-4" />} label="Format JSON" onClick={onFormat} />
+          <EditorButton
+            icon={<Wand2 className="h-4 w-4" />}
+            label="Format JSON"
+            onClick={onFormat}
+          />
           <EditorButton icon={<Trash2 className="h-4 w-4" />} label="Clear" onClick={onClear} />
-          <EditorButton icon={<RotateCcw className="h-4 w-4" />} label="Use example" onClick={onUseExample} />
+          <EditorButton
+            icon={<RotateCcw className="h-4 w-4" />}
+            label="Use example"
+            onClick={onUseExample}
+          />
         </div>
       </div>
 

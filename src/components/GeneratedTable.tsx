@@ -193,7 +193,12 @@ function StringCell({ value }: { value: string }) {
 
   if (hint === 'url') {
     return (
-      <a href={value} target="_blank" rel="noreferrer" className="break-all font-sans font-medium text-teal-700">
+      <a
+        href={value}
+        target="_blank"
+        rel="noreferrer"
+        className="break-all font-sans font-medium text-teal-700"
+      >
         {value}
       </a>
     );

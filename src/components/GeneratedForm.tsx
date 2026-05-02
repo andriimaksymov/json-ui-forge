@@ -27,7 +27,7 @@ interface FormNodeProps {
 
 function FormNode({ label, value, schema, path, onChange }: FormNodeProps) {
   switch (schema.kind) {
-    case 'string':
+    case 'string': {
       const stringValue = typeof value === 'string' ? value : '';
 
       return (
@@ -41,6 +41,7 @@ function FormNode({ label, value, schema, path, onChange }: FormNodeProps) {
           <StringPreview value={stringValue} />
         </FieldShell>
       );
+    }
     case 'number':
       return (
         <FieldShell label={label} type="number">
@@ -70,7 +71,11 @@ function FormNode({ label, value, schema, path, onChange }: FormNodeProps) {
     case 'null':
       return (
         <FieldShell label={label} type="null">
-          <input disabled value="null" className={`${inputClassName} bg-slate-100 text-slate-500`} />
+          <input
+            disabled
+            value="null"
+            className={`${inputClassName} bg-slate-100 text-slate-500`}
+          />
         </FieldShell>
       );
     case 'object':
@@ -227,7 +232,10 @@ function ArrayField({
       {value.length === 0 ? <p className="text-sm text-slate-500">No items yet.</p> : null}
       <div className="flex flex-col gap-2">
         {value.map((item, index) => (
-          <div key={index} className="flex items-start gap-2 rounded-lg border border-slate-200 bg-white p-2">
+          <div
+            key={index}
+            className="flex items-start gap-2 rounded-lg border border-slate-200 bg-white p-2"
+          >
             <div className="flex-1">
               <FormNode
                 label={`Item ${index + 1}`}
@@ -252,12 +260,22 @@ function ArrayField({
   );
 }
 
-function FieldShell({ label, type, children }: { label: string; type: string; children: ReactNode }) {
+function FieldShell({
+  label,
+  type,
+  children,
+}: {
+  label: string;
+  type: string;
+  children: ReactNode;
+}) {
   return (
     <label className="block rounded-lg border border-slate-200 bg-white px-3 py-3">
       <span className="mb-2 flex items-center justify-between gap-2">
         <span className="text-sm font-medium text-slate-900">{label}</span>
-        <span className="rounded-md bg-slate-100 px-2 py-1 text-xs font-medium text-slate-500">{type}</span>
+        <span className="rounded-md bg-slate-100 px-2 py-1 text-xs font-medium text-slate-500">
+          {type}
+        </span>
       </span>
       {children}
     </label>
@@ -278,7 +296,11 @@ function StringPreview({ value }: { value: string }) {
   if (hint === 'svg-markup') {
     return (
       <div className="mt-3 overflow-hidden rounded-lg border border-slate-200 bg-slate-50 p-3">
-        <img src={svgMarkupToDataUrl(value)} alt="Inline SVG preview" className="max-h-32 w-full object-contain" />
+        <img
+          src={svgMarkupToDataUrl(value)}
+          alt="Inline SVG preview"
+          className="max-h-32 w-full object-contain"
+        />
       </div>
     );
   }
@@ -345,7 +367,12 @@ function valueToInput(value: JSONValue | undefined): string {
     return '';
   }
 
-  if (value === null || typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+  if (
+    value === null ||
+    typeof value === 'string' ||
+    typeof value === 'number' ||
+    typeof value === 'boolean'
+  ) {
     return String(value);
   }
 

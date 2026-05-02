@@ -50,7 +50,9 @@ const initialJson = initialParseResult.ok ? initialParseResult.value : undefined
 export default function App() {
   const [rawJson, setRawJson] = useState(EXAMPLE_JSON);
   const [parseResult, setParseResult] = useState<ParseJsonResult>(initialParseResult);
-  const [schema, setSchema] = useState<SchemaNode | null>(initialJson !== undefined ? detectSchema(initialJson) : null);
+  const [schema, setSchema] = useState<SchemaNode | null>(
+    initialJson !== undefined ? detectSchema(initialJson) : null,
+  );
   const [editedJson, setEditedJson] = useState<JSONValue | undefined>(initialJson);
   const [activeTab, setActiveTab] = useState<PreviewTabId>('form');
 
@@ -144,7 +146,9 @@ export default function App() {
               onFormChange={handleFormChange}
             />
           ) : (
-            <EmptyPreview error={!parseResult.ok && !parseResult.empty ? parseResult.error : undefined} />
+            <EmptyPreview
+              error={!parseResult.ok && !parseResult.empty ? parseResult.error : undefined}
+            />
           )}
         </PreviewTabs>
       </main>
@@ -175,9 +179,13 @@ function PreviewContent({
     case 'table':
       return <GeneratedTable value={editedJson} />;
     case 'typescript':
-      return <CodeBlock code={typeScriptCode} label="TypeScript output" copyLabel="Copy TypeScript" />;
+      return (
+        <CodeBlock code={typeScriptCode} label="TypeScript output" copyLabel="Copy TypeScript" />
+      );
     case 'react':
-      return <CodeBlock code={reactCode} label="React component output" copyLabel="Copy React Code" />;
+      return (
+        <CodeBlock code={reactCode} label="React component output" copyLabel="Copy React Code" />
+      );
     case 'json':
       return <CodeBlock code={jsonOutput} label="Edited JSON output" copyLabel="Copy JSON" />;
   }
@@ -189,7 +197,8 @@ function EmptyPreview({ error }: { error?: string }) {
       <div className="max-w-md text-center">
         <h2 className="text-lg font-semibold text-slate-950">Your generated UI will appear here</h2>
         <p className="mt-2 text-sm leading-6 text-slate-600">
-          Paste valid JSON to generate an editable form, table preview, TypeScript interfaces, and React code.
+          Paste valid JSON to generate an editable form, table preview, TypeScript interfaces, and
+          React code.
         </p>
         {error ? (
           <div className="mt-4 text-left">
